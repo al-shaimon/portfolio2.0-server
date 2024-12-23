@@ -2,21 +2,14 @@ import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { TEducation } from './education.interface';
 import { Education } from './education.model';
-import { QueryBuilder } from '../../builder/QueryBuilder';
 
 const createEducation = async (payload: TEducation) => {
   const result = await Education.create(payload);
   return result;
 };
 
-const getAllEducation = async (query: Record<string, unknown>) => {
-  const educationQuery = new QueryBuilder(Education, query)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
-
-  const result = await educationQuery.modelQuery;
+const getAllEducation = async () => {
+  const result = await Education.find();
   return result;
 };
 
@@ -50,4 +43,4 @@ export const EducationServices = {
   getSingleEducation,
   updateEducation,
   deleteEducation,
-}; 
+};

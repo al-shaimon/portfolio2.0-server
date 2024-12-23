@@ -2,21 +2,14 @@ import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { TBlog } from './blog.interface';
 import { Blog } from './blog.model';
-import { QueryBuilder } from '../../builder/QueryBuilder';
 
 const createBlog = async (payload: TBlog) => {
   const result = await Blog.create(payload);
   return result;
 };
 
-const getAllBlogs = async (query: Record<string, unknown>) => {
-  const blogQuery = new QueryBuilder(Blog, query)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
-
-  const result = await blogQuery.modelQuery;
+const getAllBlogs = async () => {
+  const result = await Blog.find();
   return result;
 };
 

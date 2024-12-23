@@ -2,21 +2,14 @@ import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { TExperience } from './experience.interface';
 import { Experience } from './experience.model';
-import { QueryBuilder } from '../../builder/QueryBuilder';
 
 const createExperience = async (payload: TExperience) => {
   const result = await Experience.create(payload);
   return result;
 };
 
-const getAllExperience = async (query: Record<string, unknown>) => {
-  const experienceQuery = new QueryBuilder(Experience, query)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
-
-  const result = await experienceQuery.modelQuery;
+const getAllExperience = async () => {
+  const result = await Experience.find();
   return result;
 };
 
@@ -50,4 +43,4 @@ export const ExperienceServices = {
   getSingleExperience,
   updateExperience,
   deleteExperience,
-}; 
+};

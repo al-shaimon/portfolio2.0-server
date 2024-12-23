@@ -16,19 +16,7 @@ const createSkill = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllSkills = catchAsync(async (req: Request, res: Response) => {
-  const result = await SkillServices.getAllSkills(req.query);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Skills retrieved successfully',
-    data: result,
-  });
-});
-
-const getSkillsByCategory = catchAsync(async (req: Request, res: Response) => {
-  const { category } = req.params;
-  const result = await SkillServices.getSkillsByCategory(category);
+  const result = await SkillServices.getAllSkills();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -65,7 +53,6 @@ const deleteSkill = catchAsync(async (req: Request, res: Response) => {
 export const SkillController = {
   createSkill,
   getAllSkills,
-  getSkillsByCategory,
   updateSkill,
   deleteSkill,
 };

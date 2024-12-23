@@ -9,7 +9,6 @@ const router = express.Router();
 
 // Public routes
 router.get('/', SkillController.getAllSkills);
-router.get('/category/:category', SkillController.getSkillsByCategory);
 
 // Protected routes (admin only)
 router.post(

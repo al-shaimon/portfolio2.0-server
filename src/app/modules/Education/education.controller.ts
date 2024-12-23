@@ -16,7 +16,7 @@ const createEducation = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllEducation = catchAsync(async (req: Request, res: Response) => {
-  const result = await EducationServices.getAllEducation(req.query);
+  const result = await EducationServices.getAllEducation();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

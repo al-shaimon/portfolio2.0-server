@@ -2,26 +2,22 @@ import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { TSkill } from './skill.interface';
 import { Skill } from './skill.model';
-import { QueryBuilder } from '../../builder/QueryBuilder';
 
 const createSkill = async (payload: TSkill) => {
   const result = await Skill.create(payload);
   return result;
 };
 
-const getAllSkills = async (query: Record<string, unknown>) => {
-  const skillQuery = new QueryBuilder(Skill, query)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
-
-  const result = await skillQuery.modelQuery;
+const getAllSkills = async () => {
+  const result = await Skill.find();
   return result;
 };
 
-const getSkillsByCategory = async (category: string) => {
-  const result = await Skill.find({ category });
+const getSingleSkill = async (id: string) => {
+  const result = await Skill.findById(id);
+  if (!result) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Skill not found');
+  }
   return result;
 };
 
@@ -44,7 +40,7 @@ const deleteSkill = async (id: string) => {
 export const SkillServices = {
   createSkill,
   getAllSkills,
-  getSkillsByCategory,
+  getSingleSkill,
   updateSkill,
   deleteSkill,
 };
